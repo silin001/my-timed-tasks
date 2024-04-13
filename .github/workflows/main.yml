@@ -17,7 +17,7 @@ on:
   # 定时任务，在每天的5点59分、6点推送消息到微信
   # 最终的结论就是，比北京时间慢8小时，用目标时间减8就可以了
   # 格林时间 utc  转换北京时间 + 8
-    - cron: '35,32,33 6 * * 6,0'  #  每周1-5、 每天的 下午16点 36分 37分
+    - cron: '45,44,47 6 * * 6,0'  #  每周1-5、 每天的 下午16点 36分 37分
     # - cron: '36,37 16 * * 1-5' #  每周1-5、 每天的 下午16点 36分 37分
     # - cron: '00 18 * * 1-5' # 每周 1-5、 18点 下班打卡
     # - cron: '00 15 * * 4-5' # 每周 4-5、 15点 写周报
@@ -36,9 +36,12 @@ jobs:
       #uses 关键字指定此步骤将运行 actions/checkout 操作的 v3。 这是一个将存储
       #库签出到运行器上的操作，允许您对代码（如生成和测试工具）运行脚本或其他操
       #作。 每当工作流程将针对存储库的代码运行时，都应使用签出操作。
-      - uses: szenius/set-timezone@v1.0 # 设置执行环境的时区
+      - name: 设置执行环境的时区
+        uses: szenius/set-timezone@v1.0 # 设置执行环境的时区
         with:
           timezoneLinux: "Asia/Beijing" # 北京时间
+          timezoneWindows: "Asia/Beijing"
+          timezoneMacos: "Asia/Beijing"
 
       - name: 安装node并指定版本
         uses: actions/setup-node@v3 # 安装node
