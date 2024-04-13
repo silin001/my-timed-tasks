@@ -11,9 +11,8 @@ import { xtsMsgPushWeChat, zipPackLogs } from "../utils/index";
 
 /** 下班打卡函数 */
 export const clockOut = () => {
-  console.log('测试-推送下班打卡消息到微信')
+  console.log('推送下班打卡消息到微信-')
   const xtsToken = "9O547m1wt4SsX2F19yHhVlxnH";
-
   const msgList = ["下班时间到啦！！！", "下班要打卡啊！！！"];
   zipPackLogs(msgList)
   xtsMsgPushWeChat(zipPackLogs(msgList,2), xtsToken, "下班打卡提醒！！！");
