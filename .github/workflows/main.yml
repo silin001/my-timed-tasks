@@ -1,36 +1,98 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: my-timed-tasks
 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  # pull_request:
+  #   branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+  # 定时任务
+  schedule:
+  # 定时任务，在每天的5点59分、6点推送消息到微信
+    - cron: '36,37 16 * * 1-5' #  每周1-5、 每天的 下午16点 36分 37分
+    # - cron: '00 18 * * 1-5' # 每周 1-5、 18点 下班打卡
+    # - cron: '00 15 * * 4-5' # 每周 4-5、 15点 写周报
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# 工作流
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  # 这是一个 bot 机器人 自动执行
+  bot:
+    # 在什么机器上跑
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
+    steps: # 指定的步骤
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - name: 获取源码
+        uses: actions/checkout@v3
+      #uses 关键字指定此步骤将运行 actions/checkout 操作的 v3。 这是一个将存储
+      #库签出到运行器上的操作，允许您对代码（如生成和测试工具）运行脚本或其他操
+      #作。 每当工作流程将针对存储库的代码运行时，都应使用签出操作。
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: 安装node并指定版本
+        uses: actions/setup-node@v3 # 安装node
+        with:
+          node-version: "16.x"
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: 查看yarn 版本
+        run: yarn -v
+
+      - name: yarn安装依赖
+        run: yarn
+
+      # Runs a single command using the runners shell  运行单个命令
+      # - name: 使用node执行单个任务脚本
+      #   run: echo ---Hello, world!
+      # Runs a set of commands using the runners shell 运行一组命令
+      - name: 执行多个脚本 #  运行多行脚本
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          echo ---Hello, world!,
+          echo node -v,
+          yarn start
+
+
+
+
+
+
+
+
+# name: CI
+
+# # Controls when the workflow will run
+# on:
+#   # Triggers the workflow on push or pull request events but only for the "main" branch
+#   push:
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
+
+#   # Allows you to run this workflow manually from the Actions tab
+#   workflow_dispatch:
+
+# # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# jobs:
+#   # This workflow contains a single job called "build"
+#   build:
+#     # The type of runner that the job will run on
+#     runs-on: ubuntu-latest
+
+#     # Steps represent a sequence of tasks that will be executed as part of the job
+#     steps:
+#       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+#       - uses: actions/checkout@v3
+
+#       # Runs a single command using the runners shell
+#       - name: Run a one-line script
+#         run: echo Hello, world!
+
+#       # Runs a set of commands using the runners shell
+#       - name: Run a multi-line script
+#         run: |
+#           echo Add other actions to build,
+#           echo test, and deploy your project.

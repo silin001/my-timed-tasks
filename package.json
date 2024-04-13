@@ -1,0 +1,25 @@
+{
+  "name": "my-timed-tasks",
+  "version": "1.0.0",
+  "description": "基于github actions 实现的自己一些定时任务",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx ./src/index.ts",
+    "start": "tsx ./src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silin001/my-timed-tasks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/silin001/my-timed-tasks/issues"
+  },
+  "homepage": "https://github.com/silin001/my-timed-tasks#readme",
+  "dependencies": {
+    "tsx": "^4.7.2",
+    "typescript": "^5.4.5"
+  }
+}
