@@ -1,13 +1,14 @@
 /*
  * @Date: 2024-04-11 09:52:14
- * @LastEditTime: 2024-04-11 16:49:27
+ * @LastEditTime: 2024-04-13 13:53:43
  * @Description:
- * @FilePath: \yike-design-devd:\web_si\my_webDemo\my-projectFrame\zip-pack\src\http\index.ts
+ * @FilePath: \yike-design-devd:\web_si\my_webDemo\my-projectFrame\my-timed-tasks\src\http\index.ts
  */
 
-const http = require("http");
+// const http = require("http");
+import http from 'http'
 
-export const httpGet = (api) => {
+export const httpGet = (api:string) => {
   return new Promise((resolve, reject) => {
     http
       .get(api, (res) => {
