@@ -37,7 +37,7 @@ jobs:
       - name: 安装node并指定版本
         uses: actions/setup-node@v3 # 安装node
         with:
-          node-version: "16.x"
+          node-version: "18.x"
 
       - name: 查看yarn 版本
         run: yarn -v
