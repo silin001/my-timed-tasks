@@ -1,13 +1,12 @@
 /*
  * @Date: 2024-04-12 17:19:40
- * @LastEditTime: 2024-04-12 17:19:40
+ * @LastEditTime: 2024-04-13 13:47:05
  * @Description:
  * @FilePath: \yike-design-devd:\web_si\my_webDemo\my-projectFrame\my-timed-tasks\src\utils\msgPush.ts
  */
 
-
 import { httpGet } from "../http/index";
-import { getStyleString, xtsBgStyle, xtsBgStyle2} from "../utils/index";
+import { getStyleString, xtsBgStyle, xtsBgStyle2 } from "../utils/index";
 
 /** 虾推啥服务推送到微信
  *  get请求地址：'https://wx.xtuis.cn/您的token.send?text=黄金大涨&desp=黄金大涨100元'
@@ -15,11 +14,11 @@ import { getStyleString, xtsBgStyle, xtsBgStyle2} from "../utils/index";
  */
 export async function xtsMsgPushWeChat(
   content: string,
-  token:string,
-  titleStr?:string,
+  token: string,
+  titleStr?: string
 ) {
   const api = `http://wx.xtuis.cn/${token}.send`; // 完整服务接口
-  const title = titleStr || "【前端项目打包】结果通知！";
+  const title = titleStr || "【个人定时任务推送】";
   const fullUrl = `${api}?text=${title}&desp=${content}`; // 拼接对应get请求参数
   const res = (await httpGet(fullUrl)) as Buffer; // 结果肯定是buffer类型数据 所以用as 断言一下
   // 这里接口请求到的是 buffer类型数据，方便查看需要转换一下
@@ -27,55 +26,43 @@ export async function xtsMsgPushWeChat(
   console.log("消息推送接口调用结果：", strData);
 }
 
-
-/**
- * 通过定义 LogObject 接口来指定 obj 参数的类型，您可以确保该参数包含函数中使用的所有属性
- */
-interface LogObject {
-  projectName?: string;
-  name: string;
-  version: string;
-  targetDir?: string;
-  outputFilePath?: string;
-  doneTime?: string;
-}
-
 /** 日志打印 */
-export function zipPackLogs(obj: LogObject, type: number = 1) {
-  const { projectName, name, version, targetDir, outputFilePath, doneTime } =
-    obj;
+export function zipPackLogs(msgList: string[], type: number = 1) {
+  const [m1, m2 ] = msgList;
   // 终端打印
   const cmdMsg = `
-      <===========  zip打包成功 ======>
-      ${name} 插件版本：${version}
-      打包目标目录: ${targetDir}
-      打包输出路径：${outputFilePath}
-      打包完成时间：${doneTime}
-      <===========  ${name}   =======>
+      <====== github 定时任务 ======>
+                cicd ......
+      <====== github 定时任务 ======>
       `;
-  const disable = `
-      <===========   插件已禁用   ======>
-      ${name} 插件版本：${version}
-      如需开启请在参数选项 enable 字段传入值为 true
-      <=========== ${name} ======>`;
   const wxMsg = `
         <div style="${getStyleString(xtsBgStyle)}">
-          <div>当前项目名称: <font color="red">${projectName}</font> </div>
-          <div>插件名称: <font color="red">${name}</font> </div>
-          <div>插件版本: <font color="red">${version}</font> </div>
-          <div>打包输出路径: <font color="red">${outputFilePath}</font> </div>
-          <div>打包目标目录: ${targetDir}</div>
-          <div>打包完成时间: ${doneTime}</div>
+          <div> <font color="red">${m1}</font> </div>
+          <div> <h1 color="red">${m2}</h1> </div>
         </div>
         <div style="${getStyleString(xtsBgStyle2)}">
-          <div>插件地址:  <a href="https://www.npmjs.com/package/plugin-zip-pack">plugin-zip-pack</a>  </div>
-          <div>插件作者:  尖椒土豆sss</div>
+          <div>服务地址:  <a href="https://github.com/silin001/my-timed-tasks">my-timed-tasks</a>  </div>
+          <div>服务作者:  尖椒土豆sss</div>
         </div>
       `;
-  const logs = {
+  // const wxMsg = `
+  //       <div style="${getStyleString(xtsBgStyle)}">
+  //         <div>当前项目名称: <font color="red">${projectName}</font> </div>
+  //         <div>插件名称: <font color="red">${name}</font> </div>
+  //         <div>插件版本: <font color="red">${version}</font> </div>
+  //         <div>打包输出路径: <font color="red">${outputFilePath}</font> </div>
+  //         <div>打包目标目录: ${targetDir}</div>
+  //         <div>打包完成时间: ${doneTime}</div>
+  //       </div>
+  //       <div style="${getStyleString(xtsBgStyle2)}">
+  //         <div>服务地址:  <a href="https://github.com/silin001/my-timed-tasks">my-timed-tasks</a>  </div>
+  //         <div>服务作者:  尖椒土豆sss</div>
+  //       </div>
+  //     `;
+  // 使用  { [key: number]: string } 告诉ts logs对象的 key是number类型
+  const logs: { [key: number]: string } = {
     1: cmdMsg,
-    2: disable,
-    3: wxMsg,
+    2: wxMsg,
   };
   return logs[type];
 }

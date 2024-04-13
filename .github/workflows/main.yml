@@ -15,7 +15,8 @@ on:
   # 定时任务
   schedule:
   # 定时任务，在每天的5点59分、6点推送消息到微信
-    - cron: '36,37 16 * * 1-5' #  每周1-5、 每天的 下午16点 36分 37分
+    - cron: '58,55,53 13 * * 0-6' #  每周1-5、 每天的 下午16点 36分 37分
+    # - cron: '36,37 16 * * 1-5' #  每周1-5、 每天的 下午16点 36分 37分
     # - cron: '00 18 * * 1-5' # 每周 1-5、 18点 下班打卡
     # - cron: '00 15 * * 4-5' # 每周 4-5、 15点 写周报
 
@@ -39,27 +40,22 @@ jobs:
         with:
           node-version: "18.x"
 
-      - name: 查看yarn 版本
-        run: yarn -v
+      - name: 查看node、yarn版本
+        run: |
+          node -v
+          yarn -v
 
-      - name: yarn安装依赖
+      - name: 使用yarn安装依赖
         run: yarn
 
       # Runs a single command using the runners shell  运行单个命令
       # - name: 使用node执行单个任务脚本
       #   run: echo ---Hello, world!
       # Runs a set of commands using the runners shell 运行一组命令
-      - name: 执行多个脚本 #  运行多行脚本
+      - name: 执行任务脚本 #  运行多行脚本
         run: |
           echo ---Hello, world!,
-          echo node -v,
           yarn start
-
-
-
-
-
-
 
 
 # name: CI
