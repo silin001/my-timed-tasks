@@ -5,20 +5,20 @@ name: my-timed-tasks
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
+  # push:
+  #   branches: [ "main" ]
   # pull_request:
   #   branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   # 定时任务
-  schedule:
+  # schedule:
   # 定时任务，在每天的5点59分、6点推送消息到微信
   # 最终的结论就是，比北京时间慢8小时，用目标时间减8就可以了
   # 格林时间 utc  转换北京时间 + 8
     # - cron: '0/1 10-11 * * 1-5'  #  每周1-5、 每天的 下午16点 36分 37分
-    - cron: '0/1 2-3 * * 1-5'  #  每周1-5、 每天的 下午16点 36分 37分
+    # - cron: '0/1 2-3 * * 1-5'  #  每周1-5、 每天的 下午16点 36分 37分
     # - cron: '36,37 16 * * 1-5' #  每周1-5、 每天的 下午16点 36分 37分
     # - cron: '00 18 * * 1-5' # 每周 1-5、 18点 下班打卡
     # - cron: '00 15 * * 4-5' # 每周 4-5、 15点 写周报
