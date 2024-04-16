@@ -1,6 +1,6 @@
 /*
  * @Date: 2024-04-12 17:20:56
- * @LastEditTime: 2024-04-15 09:17:30
+ * @LastEditTime: 2024-04-15 12:30:07
  * @Description:
  * @FilePath: \yike-design-devd:\web_si\my_webDemo\my-projectFrame\my-timed-tasks\src\utils\tools.ts
  */
@@ -14,10 +14,3 @@ export function getStyleString (styleObj: { [key : string]: string}) {
     .map(key => `${key}:${styleObj[key]}`)
     .join(';');
 }
-
-// export function getStyleString(styleObj: object) {
-//   return Object.keys(styleObj)
-//     .map(key => `${key}:${styleObj[key]}`)
-//     .join(';');
-// }
-

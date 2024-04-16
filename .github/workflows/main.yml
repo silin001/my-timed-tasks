@@ -25,7 +25,7 @@ on:
 
 # 工作流
 jobs:
-  # 这是一个 bot 机器人 自动执行
+  # 这是一个名称 为 bot 的工作流
   bot:
     # 在什么机器上跑
     runs-on: ubuntu-latest

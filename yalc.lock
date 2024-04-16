@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "test-plugin-zip-pack": {
+      "signature": "d0616db77730301a4effe54f803c248f",
+      "file": true
+    }
+  }
+}

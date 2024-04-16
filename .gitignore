@@ -1,4 +1,7 @@
 .history
+*.yalc
+.zip
+*.zip
 .vscode
 # Logs
 logs
