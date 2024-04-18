@@ -3,7 +3,9 @@ import commonjs from '@rollup/plugin-commonjs'; // 将 common js 模块转成es6
 // 让rollup支持 ts
 import typescript from '@rollup/plugin-typescript';
 // rollup 并不知道如何寻找路径以外的依赖如 node_module 中的依赖。 所以需要借助 @rollup/plugin-node-resolve 插件帮助程序可以在项目依赖中找到对应文件。
-import nodeResolve from '@rollup/plugin-node-resolve';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+// 代码打包混淆
+import { terser } from 'rollup-plugin-terser';
 // import { pluginZipPackRollup } from 'plugin-zip-pack'
 import { pluginZipPackRollup } from 'test-plugin-zip-pack'
 
@@ -31,16 +33,18 @@ export default [
       }),
       // 将 CommonJS规范 转换成 ES2015
       commonjs(),
-      nodeResolve(),
       // 让rollup 支持打包ts代码,并可以指定ts代码打包过程中的相关配置
-      typescript()
-      // nodeResolve({
-      //   exportConditions: ['node'],
-      //   preferBuiltins: false,
-      // }),
-      // typescript({ exclude: 'node_modules' }),
+      typescript({ exclude: 'node_modules' }),
+      nodeResolve({
+        // 指定是否优先使用 Node.js 内置模块。如果设置为 true，当导入的模块与 Node.js 内置模块同名时，会优先使用内置模块。
+        preferBuiltins: false,
+        // 用于指定是否将导入的模块路径映射到浏览器版本的路径,当设置为 `true` 时，该插件会尝试将模块路径转换为适用于浏览器环境的路径。
+        browser: true,
+      }),
+      terser()
     ],
-    // external: ['process', 'os', 'tty'],
+     // 标记为外部依赖，不要将其打包进最终的输出文件中
+    external: ['http'],
     ignore: [
       "node_modules/**" // 忽略目录
     ]
