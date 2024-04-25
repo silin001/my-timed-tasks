@@ -5,10 +5,12 @@ import typescript from '@rollup/plugin-typescript';
 // rollup 并不知道如何寻找路径以外的依赖如 node_module 中的依赖。 所以需要借助 @rollup/plugin-node-resolve 插件帮助程序可以在项目依赖中找到对应文件。
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 // 代码打包混淆
-import { terser } from 'rollup-plugin-terser';
-// import { pluginZipPackRollup } from 'plugin-zip-pack'
-import { pluginZipPackRollup } from 'test-plugin-zip-pack'
-
+// import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
+// import { pluginZipPackRollup } from 'test-plugin-zip-pack'
+import { test, pluginZipPackRollup } from 'test-plugin-zip-pack';
+console.log('🚀🚀 ~ test:', test)
+// const { pluginZipPackRollup } = pkg;
 export default [
   {
     input: './src/index.ts', // 打包的入口文件
@@ -40,6 +42,7 @@ export default [
         preferBuiltins: false,
         // 用于指定是否将导入的模块路径映射到浏览器版本的路径,当设置为 `true` 时，该插件会尝试将模块路径转换为适用于浏览器环境的路径。
         browser: true,
+        // exportConditions: ['node'],
       }),
       terser()
     ],
