@@ -5,10 +5,11 @@ import typescript from '@rollup/plugin-typescript';
 // rollup 并不知道如何寻找路径以外的依赖如 node_module 中的依赖。 所以需要借助 @rollup/plugin-node-resolve 插件帮助程序可以在项目依赖中找到对应文件。
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 // 代码打包混淆
-// import { terser } from 'rollup-plugin-terser';
 import terser from '@rollup/plugin-terser';
 // import { pluginZipPackRollup } from 'test-plugin-zip-pack'
+// import { test, pluginZipPackRollup } from 'test-plugin-zip-pack';
 import { test, pluginZipPackRollup } from 'test-plugin-zip-pack';
+
 console.log('🚀🚀 ~ test:', test)
 // const { pluginZipPackRollup } = pkg;
 export default [
@@ -29,10 +30,10 @@ export default [
       },
     ],
     plugins: [
-      pluginZipPackRollup({
-        optZipName: 'dist',
-        isPackagingTime: false
-      }),
+      // pluginZipPackRollup({
+      //   optZipName: 'dist',
+      //   isPackagingTime: false
+      // }),
       // 将 CommonJS规范 转换成 ES2015
       commonjs(),
       // 让rollup 支持打包ts代码,并可以指定ts代码打包过程中的相关配置
